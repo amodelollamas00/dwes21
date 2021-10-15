@@ -30,5 +30,7 @@
     }
 
     echo "<br> La suma de la diagonal mayor da $Mayor <br>";
-    echo "La suma de la diagonal mayor da $Menor";
+    echo "La suma de la diagonal mayor da $Menor <br>";
+
+    echo "La diferencia entre las dos es ".$Mayor-$Menor;
 ?>
