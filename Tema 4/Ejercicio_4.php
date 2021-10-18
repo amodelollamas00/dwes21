@@ -34,13 +34,14 @@
  $mail = $_GET["mail"];
 
  foreach ($datos as $clave => $valor){
+
     $BDmail = $valor["mail"];
 
-    if($mail == $valor["mail"]){
-        echo "El email existe en la base de datos";
+    if($mail == $BDmail){
+        echo "El email -$mail- existe en la base de datos";
     }
     else{
-        echo "El email no existe en la base de datos";
+        echo "El email -$mail- no existe en la base de datos";
     }
  }
 
