@@ -18,4 +18,11 @@
           return true;
     }
 
+    if(esPrimo($numero)){
+      echo "La funcion devuelve True";
+    }else{
+      echo "La funcion devuelve False";
+    }
+    
+
 ?>
