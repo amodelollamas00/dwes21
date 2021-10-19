@@ -27,22 +27,24 @@
 
  mysqli_select_db($conn,"medac");
 
- //EJECUTAMOS LA CONSULTA A BD
+ $datos = mysqli_query ($conn,$consulta);
 
- $datos=mysqli_query ($conn,$consulta);
+    $mail = $_GET["mail"];
 
- $mail = $_GET["mail"];
+ function existeUsuario($mail, $datos){    
 
- foreach ($datos as $clave => $valor){
+    foreach ($datos as $clave => $valor){
 
-    $BDmail = $valor["mail"];
+        $BDmail = $valor["mail"];
 
-    if($mail == $BDmail){
-        echo "El email -$mail- existe en la base de datos";
-    }
-    else{
-        echo "El email -$mail- no existe en la base de datos";
+        if($mail == $BDmail){
+            return "El email -$mail- existe en la base de datos";
+        }
+        else{
+            return "El email -$mail- no existe en la base de datos";
+        }
     }
  }
 
+ echo existeUsuario($mail, $datos);
 ?>
