@@ -21,7 +21,7 @@
 
  //Preparamos sentencia SQL
 
- $consulta="SELECT mail FROM usuarios";
+ $consulta="SELECT mail, contraseña FROM usuarios";
 
  //SELECCIONAMOS LA BASE DE DATOS
 
@@ -30,21 +30,26 @@
  $datos = mysqli_query ($conn,$consulta);
 
     $mail = $_GET["mail"];
+    $contraseña = $_GET["contraseña"];
 
- function existeUsuario($mail, $datos){    
+ function existeUsuario($mail, $datos, $contraseña){    
 
     foreach ($datos as $clave => $valor){
 
         $BDmail = $valor["mail"];
+        $BDcontraseña = $valor["contraseña"];
 
-        if($mail == $BDmail){
-            return "El email -$mail- existe en la base de datos";
+        if($mail == $BDmail && $contraseña == $BDcontraseña){
+            return "El usuario -$mail- existe en la base de datos";
         }
-        else{
-            return "El email -$mail- no existe en la base de datos";
+        else if ($mail != $BDmail){
+            return "El usuario -$mail- no existe en la base de datos";
+        }
+        else if($mail == $BDmail && $contraseña != $BDcontraseña){
+            return "la contraseña es incorrecta";
         }
     }
  }
 
- echo existeUsuario($mail, $datos);
+ echo existeUsuario($mail, $datos, $contraseña);
 ?>
