@@ -30,14 +30,14 @@
  $datos = mysqli_query ($conn,$consulta);
 
     $mail = $_GET["mail"];
-    $contraseña = $_GET["contraseña"];
+    $contraseña = $_GET["contraeña"];
 
  function existeUsuario($mail, $datos, $contraseña){    
 
     foreach ($datos as $clave => $valor){
 
-        $BDmail = $valor["mail"];
-        $BDcontraseña = $valor["contraseña"];
+        $BDmail = $valor["email"];
+        $BDcontraseña = $valor["password"];
 
         if($mail == $BDmail && $contraseña == $BDcontraseña){
             return "El usuario -$mail- existe en la base de datos";

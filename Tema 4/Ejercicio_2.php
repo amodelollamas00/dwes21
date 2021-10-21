@@ -8,7 +8,7 @@
     $año = date("Y",$fecha);
 
     /*Esta es la forma sin funcion de hacerlo.
-    if($año%4 == 0){
+    if(($año%4 == 0 && $año%100!=0) || $año%400 == 0 ){
         echo "El año introducido -$año- es bisiesto";
     }
     else{
