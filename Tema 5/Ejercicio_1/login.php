@@ -29,8 +29,8 @@
 
  $datos = mysqli_query ($conn,$consulta);
 
-    $mail = $_GET["mail"];
-    $contraseña = $_GET["contraseña"];
+    $mail = $_POST["login"];
+    $contraseña = $_POST["pass"];
 
  function existeUsuario($mail, $datos, $contraseña){    
 
@@ -51,5 +51,12 @@
     }
  }
 
- echo existeUsuario($mail, $datos, $contraseña);
+ if(existeUsuario($mail, $datos, $contraseña)){
+ session_start();
+ $_SESSION["id"]=$mail;
+
+ echo $_SESSION["id"];
+ }else{
+     //index.php error no existe el usuario
+ }
 ?>
