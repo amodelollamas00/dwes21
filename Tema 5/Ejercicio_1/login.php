@@ -1,6 +1,4 @@
 <?php
-//Crea la función existeUsuario que reciba por parámetro un email y contraseña, conecte a la base de datos MEDAC y
-//consulte en la tabla usuarios si existe, devolviendo true si ha encontrado el usuario o false en caso contrario.
 
  /*CONEXION A BASE DE DATOS*/
 
@@ -21,7 +19,10 @@
 
  //Preparamos sentencia SQL
 
- $consulta="SELECT email, password FROM usuarios";
+    $mail = $_POST["login"];
+    $contraseña = $_POST["pass"];
+
+ $consulta="SELECT email, password, nombre FROM usuarios WHERE email = '".$mail."' && password = '".$contraseña."'";
 
  //SELECCIONAMOS LA BASE DE DATOS
 
@@ -29,34 +30,31 @@
 
  $datos = mysqli_query ($conn,$consulta);
 
-    $mail = $_POST["login"];
-    $contraseña = $_POST["pass"];
-
- function existeUsuario($mail, $datos, $contraseña){    
-
+ 
+ function existeUsuario($datos){  
+     
+ if($datos -> num_rows > 0){
+     
     foreach ($datos as $clave => $valor){
-
-        $BDmail = $valor["email"];
-        $BDcontraseña = $valor["password"];
-
-        if($mail == $BDmail && $contraseña == $BDcontraseña){
-            return "El usuario -$mail- existe en la base de datos";
-        }
-        else if ($mail != $BDmail){
-            return "El usuario -$mail- no existe en la base de datos";
-        }
-        else if($mail == $BDmail && $contraseña != $BDcontraseña){
-            return "la contraseña es incorrecta";
-        }
+        session_start();
+        $_SESSION["nombre"] = $valor["nombre"]; 
+        return True;
     }
- }
+ }else{return False;}
+}
 
- if(existeUsuario($mail, $datos, $contraseña)){
- session_start();
- $_SESSION["id"]=$mail;
+ if(existeUsuario($datos)){
+ $_SESSION["email"]=$mail;
 
- echo $_SESSION["id"];
+ echo $_SESSION["email"];
+ echo "<br>";
+ echo $_SESSION["nombre"];
  }else{
-     //index.php error no existe el usuario
+     
+    setCookie("cookieState", 2);
+    header("Location: index.php");
+
+    echo "nada";
+    
  }
 ?>
