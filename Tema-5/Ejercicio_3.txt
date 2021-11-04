@@ -1,0 +1,25 @@
+	-Session.name: Define el nombre por defecto que tendra la cookie (Por defecto PHPSESSID)
+
+	-Session.cookie_lifetime: Define el tiempo de vida en segundos de las cookies mandadas al servidor,
+por defecto esta en 0 que significa que durara hasta que el navegador se cierre.
+
+	-Session.cookie_path: Especifica la ruta donde se guarda la cookie de sesion.
+	
+	-Session.cookie_domain: Especifica el dominio a establecer en la cookie de sesión.
+ Por defecto es ninguno, por lo que el dominio sera el nombre de host del servidor que genero la cookie.
+
+	-Session.use_cookies: Especificara si el modulo usara cookies para almacenar el id de sesion en la parte del cliente por defecto esta habilitado
+con un 1 al ser boleano.
+
+	-Session.use_strict_mode: Especifica si el módulo usará el modo de id de sesión estricto. Si este modo está habilitado,
+el módulo no aceptará IDs de sesioines no inicializados. Si se envia desde el navegador un ID de sesión no inicializado, se envía un nuevo ID de sesión al navegador. 
+Las aplicaciones están protegidas de la fijación de sesiones mediante la adopción de sesión con modo estricto. El valor predeterminado es 0 (deshabilitado).
+
+	-Session.lazy_write: Determina si los datos de sesion son reescritos solamente cuando cambian. por predeterminado esta activado con 1.
+
+	-Session.cookie_secure: Especifica si las cookies deberían enviarse sólo sobre conexiones seguras. Por defecto esta apagado.
+	
+	-Session.use_only_cookies: Especifica si el modulo solo puede usar cookies para almacenar el id de sesion en la parte cliente.
+este ajuste previene ataques que implican pasar el id de sesión en la URL. por defecto esta activado.
+
+	-Session.auto_start: Indica si el modulo inicia una sesion automaticamente al arrancar una peticion, por defecto esta deshabilitado.

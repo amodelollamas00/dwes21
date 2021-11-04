@@ -1,24 +1,61 @@
 <?php
-//Crea la función fibonacci que reciba por parámetro la cantidad de elementos 
-//que se desea obtener de la serie Fibonacci (si no se especifica nada por defecto obtendrá los 10 primeros),
-//y devuelva un array con dicha sucesión de números.
- 
-$numero = $_GET["numero"];
-$v1;
+    /*CONEXION A BASE DE DATOS*/
 
-if($numero == null){
-    $numero = 10;
-}
+    $servername = "localhost";
+    $database = "medac";
+    $username = "root";
+    $password = "";
 
- function fibonacci($numero = 10){
-    $vfibonacci  = [1,2];
- 
-  for($i=1;$i<$numero-1;$i++)
-    {
-        $vfibonacci[] = $vfibonacci[$i]+$vfibonacci[$i-1];
+    //Create conection
+    $conn = mysqli_connect($servername, $username, $password, $database);
+
+    //Check connection
+    if(!$conn){
+        die("Connetion failed: ".mysqli_connect_error());
     }
-    return $vfibonacci;
- }
 
- print_r(fibonacci($numero));
+    echo "Conectado correctamente"."</br>";
+
+    //Preparamos sentencia SQL
+
+    $consulta="SELECT * FROM usuarios";
+
+    //SELECCIONAMOS LA BASE DE DATOS
+
+    mysqli_select_db($conn,"medac");
+
+    //EJECUTAMOS LA CONSULTA A BD
+
+    $datos=mysqli_query ($conn,$consulta);
+
+    //RECORREMOS EL ARRAY
+
+    foreach ($datos as $clave => $valor){
+        $fecha_int = $valor["fecha_int"];
+        $fecha_date = $valor["fecha_date"];
+        $fecha_datetime = $valor["fecha_datetime"];
+        $fecha_time = $valor["fecha_time"];
+        $fecha_timestamp = $valor["fecha_timestamp"];
+
+        $fecha_int = date('Y-m-d H:i:s', $fecha_int);
+
+        echo "FECHAS SIN CAMBIAR </br>";
+        echo "=================================================================================================</br>";
+
+        echo "Esta es la fecha_int => ".date('Y-m-d H:i:s', strtotime($fecha_int))."</br>";
+        echo "Esta es la fecha_date => ".date('Y-m-d H:i:s', strtotime($fecha_date))."</br>";
+        echo "Esta es la fecha_datetime => ".date('Y-m-d H:i:s', strtotime($fecha_datetime))."</br>";
+        echo "Esta es la fecha_time => ".date('Y-m-d H:i:s', strtotime($fecha_time))."</br>";
+        echo "Esta es la fecha_timestamp => ".date('Y-m-d H:i:s', strtotime($fecha_timestamp))."</br></br>"; 
+
+        echo "FECHAS -15 DIAS </br>";
+        echo "=================================================================================================</br>";
+
+        echo "Esta es la fecha_int => ".date('Y-m-d H:i:s', strtotime($fecha_int.'-15 day'))."</br>";
+        echo "Esta es la fecha_date => ".date('Y-m-d H:i:s', strtotime($fecha_date.'-15 day'))."</br>";
+        echo "Esta es la fecha_datetime => ".date('Y-m-d H:i:s', strtotime($fecha_datetime.'-15 day'))."</br>";
+        echo "Esta es la fecha_time => ".date('Y-m-d H:i:s', strtotime($fecha_time.'-15 day'))."</br>";
+        echo "Esta es la fecha_timestamp => ".date('Y-m-d H:i:s', strtotime($fecha_timestamp.'-15 day'))."</br>";
+    }
+
 ?>

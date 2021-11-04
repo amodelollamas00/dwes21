@@ -38,23 +38,22 @@
     foreach ($datos as $clave => $valor){
         session_start();
         $_SESSION["nombre"] = $valor["nombre"]; 
+        $_SESSION["email"]= $valor["email"];
         return True;
     }
  }else{return False;}
 }
 
  if(existeUsuario($datos)){
- $_SESSION["email"]=$mail;
+   setCookie("cookieState", 0);
+  // $_SESSION["email"]=$mail;
 
- echo $_SESSION["email"];
- echo "<br>";
- echo $_SESSION["nombre"];
+ header("Location: dashboard.php");
  }else{
      
-    setCookie("cookieState", 2);
+    setCookie("cookieState", 1);
     header("Location: index.php");
 
-    echo "nada";
     
  }
 ?>
